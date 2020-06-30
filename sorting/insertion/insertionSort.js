@@ -1,4 +1,4 @@
-module.exports = function insertionSort(arr) {
+module.exports = function sort(arr) {
   if (!(arr && arr.length)) {
     return;
   }

@@ -30,7 +30,7 @@ function merge(arr, start, mid, end) {
   }
 }
 
-function mergeSort(arr, start = 0, end = arr.length - 1) {
+function sort(arr, start = 0, end = arr.length - 1) {
   if (!(arr && arr.length) || start >= end) {
     return;
   }
@@ -38,14 +38,14 @@ function mergeSort(arr, start = 0, end = arr.length - 1) {
   const mid = ((start + end) >> 1) | 0;
 
   if (mid !== start) {
-    mergeSort(arr, start, mid);
+    sort(arr, start, mid);
   }
 
   if (mid + 1 !== end) {
-    mergeSort(arr, mid + 1, end);
+    sort(arr, mid + 1, end);
   }
 
   merge(arr, start, mid, end);
 }
 
-module.exports = mergeSort;
+module.exports = sort;
