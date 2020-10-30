@@ -4,21 +4,28 @@ let i, j, base, temp;
 
 function getRandomIndex(start, end) {
     start = Math.ceil(start);
-    end = Math.floor(end);
-    return Math.floor(Math.random() * (end - start + ONE)) + start;
-  }
+    
+    return Math.floor(Math.random() * (Math.floor(end) - start + ONE)) + start;
+}
 
-function part(arr, start, end) {
-    let isEquall = true;
+function areElementsEqual(arr, start, end) {
+    areEqual = true;
 
-    for (j = start; j <= end - 1; ++j) {
-        if (arr[j + 1] !== arr[j]) {
-            isEquall = false;
+    // Check whether all array elements from start to end are the same
+    for (i = start; i <= end - 1; ++i) {
+        if (arr[i + 1] !== arr[i]) {
+            areEqual = false;
             break;
         }
     }
 
-    if (isEquall) {
+    return areEqual;
+}
+
+function part(arr, start, end) {
+    // If array elements from start to end are the same 
+    // then return their half position index
+    if (areElementsEqual(arr, start, end)) {
         return ((start + end) / 2) | 0;
     }
 
