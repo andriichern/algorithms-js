@@ -1,28 +1,25 @@
 const ONE = 1;
 const ZERO = 0;
-let i, j, base, temp;
+let i, j, mid, base, temp;
 
 function areElementsEqual(arr, start, end) {
-    areEqual = true;
-
-    j = ((start + end) / 2) | 0;
-
     // Check whether all array elements from start to end are the same
-    for (i = start; i <= j; ++i) {
+    for (i = start; i <= mid; ++i) {
         if (arr[i] !== arr[end - i]) {
-            areEqual = false;
-            break;
+            return false;
         }
     }
 
-    return areEqual;
+    return true;
 }
 
 function part(arr, start, end) {
     // If array elements from start to end are the same 
     // then return their half position index
+    mid = ((start + end) / 2) | 0;
+
     if (areElementsEqual(arr, start, end)) {
-        return ((start + end) / 2) | 0;
+        return mid;
     }
 
     i = start;
