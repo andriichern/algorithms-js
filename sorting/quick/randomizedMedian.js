@@ -1,30 +1,17 @@
 const ONE = 1;
-const TWO = 2;
 const ZERO = 0;
-let i, j, base, temp;
+let i, j, mid, base, temp;
 
 function getMedianIndex(arr, start, end) {
-    let min = ZERO, max = ZERO;
+    mid = ((start + end) / 2) | 0;
 
-    min = getRandomIndex(start, end);
-
-    for (i = ONE; i <= TWO; ++i) {
-        temp = getRandomIndex(start, end);
-
-        if (i === TWO) {
-            if (arr[temp] > arr[min] && arr[temp] < arr[max]) {
-                return temp;
-            }
-            if (arr[temp] < arr[min]) {
-                return min;
-            }
-            return max;
-        } else if (arr[temp] < arr[min]) {
-            min = temp;
-        } else if (arr[temp] > arr[max]) {
-            max = temp;
-        }
+    if (arr[mid] > arr[start] && arr[mid] < arr[end]) {
+        return mid;
     }
+    if (arr[mid] < arr[start]) {
+        return start;
+    }
+    return end;
 }
 
 function getRandomIndex(start, end) {
@@ -36,9 +23,11 @@ function getRandomIndex(start, end) {
 function areElementsEqual(arr, start, end) {
     areEqual = true;
 
+    j = ((start + end) / 2) | 0;
+
     // Check whether all array elements from start to end are the same
-    for (i = start; i <= end - 1; ++i) {
-        if (arr[i + 1] !== arr[i]) {
+    for (i = start; i <= j; ++i) {
+        if (arr[i] !== arr[end - i]) {
             areEqual = false;
             break;
         }
@@ -55,7 +44,6 @@ function part(arr, start, end) {
     }
 
     i = (end - start) >= 3 ? getMedianIndex(arr, start, end) : getRandomIndex(start, end);
-    // i = getRandomIndex(start, end);
     temp = arr[i];
     arr[i] = arr[end];
     arr[end] = temp;
@@ -71,9 +59,11 @@ function part(arr, start, end) {
         }
     }
 
-    temp = arr[i];
-    arr[i] = arr[end];
-    arr[end] = temp;
+    if (i !== end) {
+        temp = arr[i];
+        arr[i] = arr[end];
+        arr[end] = temp;
+    }
 
     return i;
 }

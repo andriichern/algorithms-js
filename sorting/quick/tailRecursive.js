@@ -5,9 +5,11 @@ let i, j, base, temp, areEqual;
 function areElementsEqual(arr, start, end) {
     areEqual = true;
 
+    j = ((start + end) / 2) | 0;
+
     // Check whether all array elements from start to end are the same
-    for (i = start; i <= end - 1; ++i) {
-        if (arr[i + 1] !== arr[i]) {
+    for (i = start; i <= j; ++i) {
+        if (arr[i] !== arr[end - i]) {
             areEqual = false;
             break;
         }
@@ -34,9 +36,11 @@ function part(arr, start, end) {
         }
     }
 
-    temp = arr[i];
-    arr[i] = arr[end];
-    arr[end] = temp;
+    if (i !== end) {
+        temp = arr[i];
+        arr[i] = arr[end];
+        arr[end] = temp;
+    }    
 
     return i;
 }
@@ -44,7 +48,11 @@ function part(arr, start, end) {
 function sort(arr, start = ZERO, end = arr.length - ONE) {
     while (start < end) {
         base = part(arr, start, end);
-        sort(arr, start, base - ONE);
+        
+        if (base - ONE > start) {
+            sort(arr, start, base - ONE);
+        }
+        
         start = base + ONE;
     }
 }
