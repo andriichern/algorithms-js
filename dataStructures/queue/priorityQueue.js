@@ -25,11 +25,11 @@ const heapifyDesc = (arr, i, size) => {
     }
 };
 
-const priorityQueue = {
-    arr: [],
-    length: ZERO,
+function PriorityQueue() {
+    this.arr = [];
+    this.length = ZERO;
 
-    init(data) {
+    this.init = (data) => {
         this.arr = data.slice(ZERO);
         this.length = data.length;
         
@@ -38,13 +38,11 @@ const priorityQueue = {
         for (let i = start; i >= ZERO; --i) {
             heapifyDesc(this.arr, i, this.length);
         }
-    },
+    };
 
-    max() {
-        this.arr[ZERO]
-    },
+    this.max = () => this.arr[ZERO];
 
-    pop() {
+    this.pop = () => {
         if (!this.length) {
             throw new Error('Queue is empty');
         }
@@ -57,9 +55,9 @@ const priorityQueue = {
         heapifyDesc(this.arr, ZERO, this.length - ONE);
 
         return max;
-    },
+    };
 
-    setValue(index, value) {
+    this.setValue = (index, value) => {
         if (this.arr[index] && value < this.arr[index]) {
             throw new Error('New value is lower than current');
         }
@@ -70,12 +68,12 @@ const priorityQueue = {
         }
 
         this.arr[index] = value;
-    },
+    };
 
-    insert(value) {
+    this.insert = (value) => {
         this.setValue(this.length, value);
         this.length = this.length + ONE;
     }
 };
 
-module.exports = priorityQueue;
+module.exports = PriorityQueue;
